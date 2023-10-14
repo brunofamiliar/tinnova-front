@@ -1,0 +1,20 @@
+@import "../color-pallete.module.scss";
+@import "../mixins";
+
+.button {
+  width: 100%;
+  padding: 0.8rem;
+  border: none;
+  border-radius: 50px;
+  background-color: $primary;
+  color: $white-000;
+  font-weight: 600;
+  transition: opacity 0.3s ease-in-out;
+
+  @include flexbox($placeItems: center, $placeContent: center);
+
+  &:hover {
+    opacity: 0.7;
+    cursor: pointer;
+  }
+}

@@ -1,0 +1,19 @@
+$primary: #00c8b3;
+$red-100: #eb4a46;
+$grey-800: #333333;
+$grey-400: #2f2b3d6b;
+$grey-300: #2f2b3dab;
+$grey-200: #dddcdc;
+$grey-100: #f6f6f6;
+$grey-000: #efeeed;
+$white-000: #ffffff;
+
+:export {
+  primaryColor: $primary;
+  red100: $red-100;
+  grey100: $grey-800;
+  grey200: $grey-200;
+  grey100: $grey-100;
+  grey000: $grey-000;
+  white000: $white-000;
+}
