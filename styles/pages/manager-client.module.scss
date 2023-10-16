@@ -1,0 +1,52 @@
+@import "../mixins";
+@import "../color-pallete.module.scss";
+
+.button-back {
+  @include flexbox($placeItems: center, $placeContent: flex-start);
+  margin-bottom: 2rem;
+  width: 200px;
+
+  button {
+    width: 40px;
+    height: 40px;
+    padding: 0.6rem;
+  }
+
+  span {
+    font-size: 14px;
+    color: $grey-800;
+    font-weight: 600;
+    margin-left: 1rem;
+  }
+}
+
+.card-header {
+  h2 {
+    @include flexbox($placeItems: center, $placeContent: center);
+    color: $grey-800;
+  }
+
+  p {
+    padding: 0.8rem 0 2rem;
+    text-align: center;
+    color: $grey-400;
+  }
+}
+
+.card-body {
+  @include flexbox($placeItems: center, $placeContent: center);
+}
+
+.icon-note-pencil-bold {
+  margin-right: 1rem;
+}
+
+.client-form {
+  @include flexbox(
+    $placeItems: center,
+    $placeContent: center,
+    $direction: column
+  );
+
+  width: 400px;
+}

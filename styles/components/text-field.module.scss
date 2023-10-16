@@ -1,0 +1,79 @@
+@import "../color-pallete.module.scss";
+
+.input {
+  margin-bottom: 1.5rem;
+  position: relative;
+  width: 100%;
+
+  &-underlined {
+    display: block;
+    &:not(.input-danger) > input:focus + .input-label {
+      color: $grey-800;
+    }
+
+    & > input {
+      border: none;
+      border-bottom: 0.125rem solid $grey-800;
+      width: calc(100% - 0.875rem);
+      height: 2rem;
+      font-size: 1rem;
+      padding-left: 0.875rem;
+      line-height: 150%;
+      padding-top: 0.825rem;
+      padding-bottom: 0.2rem;
+
+      &:focus {
+        outline: none;
+        border-color: $primary;
+
+        & + .input-label {
+          top: 0;
+          font-size: 0.8rem;
+          margin-bottom: 32px;
+        }
+      }
+
+      &:valid {
+        & + .input-label {
+          top: 0;
+          font-size: 0.8rem;
+          margin-bottom: 32px;
+          color: $grey-800;
+        }
+      }
+
+      &:hover {
+        background: lighten($color: rgba($primary, 0.1), $amount: 1);
+        border-color: $primary;
+      }
+    }
+
+    .input-label {
+      position: absolute;
+      top: 0.9375rem;
+      left: 0.875rem;
+      line-height: 147.6%;
+      color: $grey-000;
+      transition: top 0.2s;
+    }
+
+    .input-helper {
+      display: block;
+      font-size: 0.9375rem;
+      color: $grey-800;
+      letter-spacing: 0.0275rem;
+      margin: 0.25rem 0.875rem;
+    }
+  }
+
+  &-danger {
+    & > input {
+      border-color: $red-100;
+    }
+
+    & > .input-label,
+    .input-helper {
+      color: $red-100 !important;
+    }
+  }
+}

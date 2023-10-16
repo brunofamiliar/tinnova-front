@@ -6,7 +6,11 @@ const defaultProvider: ClienteDefaultProviderType = {
   clients: [],
   loading: true,
   clientSelected: null,
-  handleEditingClient: (cpf: string) => void;
+  clientSelect: (cpf: string) => null,
+  clientEdit: (clientUpdated: ClienteDataType) => null,
+  clientAdd: (clientUpdated: ClienteDataType) => null,
+  clientDelete: (cpf: string) => null,
+  clearClientSelected: () => null,
 };
 
 const ClientContext = createContext(defaultProvider);
@@ -26,6 +30,17 @@ const ClientProvider = ({ children }: Props) => {
 
   const [loading, setLoading] = useState<boolean>(defaultProvider.loading);
 
+  const addClientDataLocalStorage = (clientData) => {
+    window.localStorage.setItem(
+      clientConfig.storageClientKeyName,
+      JSON.stringify(clientData)
+    );
+  };
+
+  const clearClientSelected = () => {
+    setClientSelected(null);
+  };
+
   useEffect(() => {
     const initClients = async () => {
       const storedClients = window.localStorage.getItem(
@@ -39,10 +54,7 @@ const ClientProvider = ({ children }: Props) => {
             if (response.ok) {
               const data = await response.json();
               setClients(data);
-              window.localStorage.setItem(
-                clientConfig.storageClientKeyName,
-                JSON.stringify(data)
-              );
+              addClientDataLocalStorage(data);
             }
           })
           .catch(() => {
@@ -60,12 +72,36 @@ const ClientProvider = ({ children }: Props) => {
     initClients();
   }, []);
 
-  const handleEditingClient = (cpf: string) => {
-    const clientFound = clients?.find(client => client.cpf === cpf);
+  const clientSelect = (cpf: string) => {
+    const clientFound = clients?.find((client) => client.cpf === cpf);
+    if (clientFound) setClientSelected(clientFound);
+  };
 
-    if(clientFound)
-      setClientSelected(clientFound);
+  const clientEdit = (clientUpdated: ClienteDataType) => {
+    const { cpf } = clientUpdated;
+    const clientFound = clients?.find((client) => client.cpf === cpf);
 
+    if (!clientFound) return;
+
+    const clientsUpdated = clients?.map((client) =>
+      client.cpf === clientFound.cpf ? { ...client, ...clientUpdated } : client
+    );
+
+    setClients(clientsUpdated as ClienteDataType[]);
+    addClientDataLocalStorage(clientsUpdated);
+  };
+
+  const clientAdd = (newClient: ClienteDataType) => {
+    const clientsUpdated = [...(clients as ClienteDataType[]), newClient];
+
+    setClients(clientsUpdated as ClienteDataType[]);
+    addClientDataLocalStorage(clientsUpdated);
+  };
+
+  const clientDelete = (cpf: string) => {
+    const clientsUpdated = clients?.filter((client) => client.cpf !== cpf);
+    setClients(clientsUpdated as ClienteDataType[]);
+    addClientDataLocalStorage(clientsUpdated);
   };
 
   return (
@@ -74,7 +110,11 @@ const ClientProvider = ({ children }: Props) => {
         clients,
         loading,
         clientSelected,
-        handleEditingClient
+        clientSelect,
+        clientEdit,
+        clientAdd,
+        clientDelete,
+        clearClientSelected,
       }}
     >
       {children}

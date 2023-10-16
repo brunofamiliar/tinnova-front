@@ -1,0 +1,9 @@
+@import "../color-pallete.module.scss";
+
+.card-container {
+  box-shadow: 0 4px 18px rgba($grey-200, 0.1), 0 0 transparent, 0 0 transparent;
+  background-color: $white-000;
+  border-radius: 4px;
+  padding: 1.4rem;
+  position: relative;
+}

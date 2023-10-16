@@ -1,19 +1,22 @@
-import { ClientProvider } from "@/context/ClientContext";
+import { Button } from "@/components/buttons/button";
+import { useClient } from "@/hooks/useClient";
 import { ListClients } from "@/templates/list-clients/list-clients";
-import style from "../../styles/index.module.scss";
+import { useRouter } from "next/router";
+import { useEffect } from "react";
 
 const Home = () => {
+  const router = useRouter();
+  const { clearClientSelected } = useClient();
+
+  useEffect(() => {
+    clearClientSelected();
+  }, [router]); // eslint-disable-line react-hooks/exhaustive-deps
+
   return (
-    <ClientProvider>
-      <header className={style.header}>
-        <div className={style.container}>
-          Gerenciamento de Clientes - Tinnova
-        </div>
-      </header>
-      <div className={style.container}>
-        <ListClients />
-      </div>
-    </ClientProvider>
+    <div className="container">
+      <Button onClick={() => router.push("/client")}>Cadastrar</Button>
+      <ListClients />
+    </div>
   );
 };
 

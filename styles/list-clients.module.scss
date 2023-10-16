@@ -2,4 +2,5 @@
 
 .container-list-clients {
   @include grid(repeat(3, 1fr), repeat(3, 1fr), 16px);
+  margin: 2rem 0;
 }

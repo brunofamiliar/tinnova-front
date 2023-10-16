@@ -9,5 +9,9 @@ export type ClienteDefaultProviderType = {
   clients: ClienteDataType[] | null;
   loading: boolean;
   clientSelected: ClienteDataType | null;
-  handleEditingClient: (cpf: string) => void;
+  clientSelect: (cpf: string) => void;
+  clientEdit: (clientUpdated: ClienteDataType) => void;
+  clientAdd: (clientUpdated: ClienteDataType) => void;
+  clientDelete: (cpf: string) => void;
+  clearClientSelected: () => void;
 };

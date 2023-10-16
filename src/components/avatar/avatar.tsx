@@ -5,10 +5,12 @@ type AvatarProps = {
 };
 
 export const Avatar = ({ label }: AvatarProps) => {
+  const labelIsEmpty = label?.trim() === "";
+
   return (
     <div className={style["container-avatar"]}>
-      <span className={style["text-label"]}>
-        {label?.trim()?.substring(0, 3).toUpperCase()}
+      <span data-testid="avatar-element" className={style["text-label"]}>
+        {labelIsEmpty ? "X" : label?.trim()?.substring(0, 3).toUpperCase()}
       </span>
     </div>
   );
