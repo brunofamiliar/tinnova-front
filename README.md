@@ -20,11 +20,11 @@ Abra [http://localhost:3000](http://localhost:3000) em seu navegador e veja o re
 
 Abra a CLI e execute o comando
 
+```bash
 npm run test
-
-# ou
-
+# or
 yarn test
+```
 
 ## Considerações
 
